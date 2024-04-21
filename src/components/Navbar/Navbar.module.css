@@ -1,0 +1,11 @@
+.activeLink {
+    @apply  text-purple-300 
+}
+
+.inactiveLink {
+    @apply hover:text-purple-400 text-purple-500
+}
+
+.navbarlink a:not(:last-child) {
+    @apply border-r-2 border-gray-600 pr-2 
+} 

@@ -1,7 +1,0 @@
-.active-link {
-    @apply border-r-2 border-white text-white
-}
-
-.inactive-link {
-    @apply bg-pink-50
-}

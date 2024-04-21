@@ -1,15 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import styled from "./Navbar.css"
+import styles from "./Navbar.module.css"
 
 const Navbar = () => {
   return (
     <div className="bg-gray-700">
-      <nav className="flex justify-start gap-2 text-purple-400 ml-4 mr-4 text-2xl font-bold p-3">
+      <nav className={`${styles.navbarlink} flex justify-start gap-2 mx-4 text-2xl font-bold p-3`}>
         <NavLink
-          to="/home"
+          to="/createwallet"
           className={({ isActive }) =>
-            isActive ? styled.active-link : styled.inactive-link
+            isActive ? styles.activeLink : styles.inactiveLink
           }
         >
           Create Wallet
@@ -18,7 +18,7 @@ const Navbar = () => {
         <NavLink
           to="/login"
           className={({ isActive }) =>
-            isActive ? styled.active-link : styled.inactive-link
+            isActive ? styles.activeLink : styles.inactiveLink
           }
         >
           Balance
@@ -26,7 +26,7 @@ const Navbar = () => {
         <NavLink
           to="/signup"
           className={({ isActive }) =>
-            isActive ? styled.active-link : styled.inactive-link
+            isActive ? styles.activeLink : styles.inactiveLink
           }
         >
           Buy Tickets
