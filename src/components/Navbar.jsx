@@ -16,7 +16,7 @@ const Navbar = () => {
         </NavLink>
 
         <NavLink
-          to="/login"
+          to="/balance"
           className={({ isActive }) =>
             isActive ? styles.activeLink : styles.inactiveLink
           }
@@ -24,12 +24,28 @@ const Navbar = () => {
           Balance
         </NavLink>
         <NavLink
-          to="/signup"
+          to="/transfer"
+          className={({ isActive }) =>
+            isActive ? styles.activeLink : styles.inactiveLink
+          }
+        >
+          Transfer Funds
+        </NavLink>
+        <NavLink
+          to="/buytickets"
           className={({ isActive }) =>
             isActive ? styles.activeLink : styles.inactiveLink
           }
         >
           Buy Tickets
+        </NavLink>
+        <NavLink
+          to="/decrypt"
+          className={({ isActive }) =>
+            isActive ? styles.activeLink : styles.inactiveLink
+          }
+        >
+          Decrypt
         </NavLink>
       </nav>
     </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import blockchain from '../../assets/blockchain.png'
+import blockchain from '../assets/blockchain.png'
 
 const Homepage = () => {
     return (
