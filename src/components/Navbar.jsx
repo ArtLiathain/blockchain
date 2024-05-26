@@ -89,7 +89,7 @@ const Navbar = () => {
         </NavLink>
       </nav>
       <div className="text-purple-500 font-bold ">
-        {(walletValue.length == 0 ? walletAddress.slice(0, 5) + "..." : "")  +
+        {(walletValue != 0 ? (walletAddress.slice(0, 5) + "...") : "")  +
           " Balance: " +
           walletValue +
           " SETH : " + tokenBalance + " Tickets"}

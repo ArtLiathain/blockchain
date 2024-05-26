@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import styles from "./App.module.css";
 import Navbar from "./components/Navbar";
-import Homepage from "./components/Homepage";
 import CreateWallet from "./components/CreateWallet";
 import TransferFunds from "./components/TransferToken";
 import ChooseWallet from "./components/Decrypt";
@@ -34,7 +31,7 @@ function App() {
               path="/buytickets"
               element={<BuyTickets></BuyTickets>}
             ></Route>
-            <Route path="/*" element={<Homepage></Homepage>}></Route>
+            <Route path="/*" element={<CreateWallet></CreateWallet>}></Route>
           </Routes>
         </BrowserRouter>
       </Web3Provider>
