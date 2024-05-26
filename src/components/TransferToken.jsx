@@ -4,41 +4,25 @@ import Web3 from "web3";
 import abi from "../assets/abi.json";
 
 const TransferFunds = () => {
-  const transferStuff = async (e) => {
+  const transferToken = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const transferData = {
-      fromWallet: formData.get("fromWallet"),
-      toWallet: formData.get("toWallet"),
-      amount: formData.get("amount"),
-      privateKey: formData.get("privateKey"),
-    };
     const web3 = new Web3(
       new Web3.providers.HttpProvider("https://rpc2.sepolia.org")
     );
 
     let tokenAddress = "0xb466831801aa5c481A0B069765d65b08121d01fe"; // HST contract address
-    let toAddress = transferData.fromWallet; // where to send it
-    let fromAddress = transferData.toWallet; // your wallet
-    let privateKey = transferData.privateKey;
-    let amount = parseInt(transferData.amount);
+    let fromAddress = formData.get("fromWallet"); // where to send it
+    let toAddress = formData.get("toWallet"); // your wallet
+    let privateKey = formData.get("privateKey");
+    let amount = parseInt(formData.get("amount"));
 
     let contract = new web3.eth.Contract(abi, tokenAddress, {
       from: fromAddress,
     });
 
-    try {
-      const gasPrice = await web3.eth.getGasPrice();
-      console.log(
-        "Current price:",
-        web3.utils.fromWei(Number(gasPrice)*210000/(10**18), "gwei"),
-        "Gwei"
-      );
-      // You may want to convert gasPrice from Wei to Gwei or other units for better readability
-    } catch (error) {
-      console.error("Error fetching gas price:", error);
-    }
-    // 1e18 === 1 HST
+    console.log(fromAddress);
+
     web3.eth.getTransactionCount(fromAddress).then(async (count) => {
       let rawTransaction = {
         from: fromAddress,
@@ -55,18 +39,22 @@ const TransferFunds = () => {
       );
       web3.eth
         .sendSignedTransaction(transaction.rawTransaction)
-        .on("transactionHash", console.log)
-        .on("error", console.error);
+        .on("transactionHash", (hash) => {
+          console.log(`Transaction hash: ${hash}`);
+        })
+        .on("receipt", (receipt) => {
+          console.log("Transaction receipt received:", receipt);
+        });
     });
   };
 
   return (
     <>
-      <StyledForm submitFunction={transferStuff}>
-        <label>Transfer To</label>
-        <input type="text" name="toWallet" placeholder="Transfer To" />
+      <StyledForm submitFunction={transferToken}>
         <label>Transfer From</label>
         <input type="text" name="fromWallet" placeholder="Transfer From" />
+        <label>Transfer To</label>
+        <input type="text" name="toWallet" placeholder="Transfer To" />
         <label>Amount</label>
         <input type="text" name="amount" placeholder="Amount" />
         <label>PrivateKey (To be removed)</label>
