@@ -40,13 +40,18 @@ const ChooseWallet = () => {
     reader.readAsText(walletStats.keystore);
   };
 
-  const setWalletValues = (e) => {
+  const setWalletValues = async (e) => {
     e.preventDefault();
+    const web3 = new Web3();
+
     const formData = new FormData(e.target);
-    setwalletAddress(formData.get("Address"));
-    setprivateKey(formData.get("privateKey"));
+    const valid = await web3.utils.isAddress(formData.get("Address"));
+    if (valid) {
+      setwalletAddress(formData.get("Address"));
+      setprivateKey(formData.get("privateKey"));
+    }
   };
-  console.log(openModal)
+  console.log(openModal);
 
   return (
     <div className="grid grid-cols-2 min-h-screen">

@@ -32,8 +32,6 @@ const Navbar = () => {
   }, [walletAddress]);
 
 
-
-
   return (
     <div className="bg-gray-700 flex items-center justify-between pr-3">
       <nav
@@ -89,7 +87,7 @@ const Navbar = () => {
         </NavLink>
       </nav>
       <div className="text-purple-500 font-bold ">
-        {(walletValue != 0 ? (walletAddress.slice(0, 5) + "...") : "")  +
+        {(walletAddress != "" ? (walletAddress.slice(0, 5) + "...") : "")  +
           " Balance: " +
           walletValue +
           " SETH : " + tokenBalance + " Tickets"}
