@@ -1,9 +1,9 @@
 .activeLink {
-    @apply  text-purple-300 
+    @apply  text-gray-100
 }
 
 .inactiveLink {
-    @apply hover:text-purple-400 text-purple-500
+    @apply hover:text-gray-100 text-gray-400
 }
 
 .navbarlink a:not(:last-child) {

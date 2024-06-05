@@ -8,6 +8,8 @@ import ChooseWallet from "./components/Decrypt";
 import Balance from "./components/Balance";
 import BuyTickets from "./components/BuyTickets";
 import {Web3Provider} from "./components/Web3Context";
+import BurnTokens from "./components/BurnToken";
+import Refund from "./components/Refund";
 
 
 function App() {
@@ -18,20 +20,18 @@ function App() {
           <Navbar></Navbar>
           <Routes>
             <Route
-              path="/createwallet"
-              element={<CreateWallet></CreateWallet>}
-            ></Route>
-            <Route
               path="/transfer"
               element={<TransferFunds></TransferFunds>}
             ></Route>
             <Route path="/choosewallet" element={<ChooseWallet></ChooseWallet>}></Route>
             <Route path="/balance" element={<Balance></Balance>}></Route>
+            <Route path="/entry" element={<BurnTokens></BurnTokens>}></Route>
+            <Route path="/refund" element={<Refund></Refund>}></Route>
             <Route
               path="/buytickets"
               element={<BuyTickets></BuyTickets>}
             ></Route>
-            <Route path="/*" element={<CreateWallet></CreateWallet>}></Route>
+            <Route path="/*" element={<ChooseWallet></ChooseWallet>}></Route>
           </Routes>
         </BrowserRouter>
       </Web3Provider>
