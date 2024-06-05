@@ -62,7 +62,7 @@ const ChooseWallet = () => {
   };
   const downloadFile = async () => {
     let web3 = new Web3();
-    console.log(privateKey)
+    console.log(privateKey);
     if (privateKey === "" || walletAddress === "") {
       setError("No wallet selected");
       setOpenModal(true);
@@ -88,9 +88,9 @@ const ChooseWallet = () => {
     const valid = await web3.utils.isAddress(formData.get("Address"));
     if (valid) {
       setwalletAddress(formData.get("Address"));
-      console.log(walletAddress)
+      console.log(walletAddress);
       setprivateKey(formData.get("privateKey"));
-      console.log(privateKey)
+      console.log(privateKey);
       setPassword(formData.get("password"));
     } else {
       setOpenModal(true);
@@ -110,7 +110,12 @@ const ChooseWallet = () => {
           <input type="text" name="password" placeholder="Password" />
           <label>Key Store</label>
           <input type="file" name="keystore" accept=".json" />
-          <button type="submit">Submit</button>
+          <button
+            className="mt-5 bg-blue-200 self-center p-4 rounded-lg text-black"
+            type="submit"
+          >
+            Submit Wallet
+          </button>
         </StyledForm>
         <StyledForm submitFunction={setWalletValues}>
           <h1 className="text-black font-bold self-center text-2xl">
@@ -122,7 +127,12 @@ const ChooseWallet = () => {
           <input type="text" name="privateKey" placeholder="Private Key" />
           <label>Password (Optional, for keystore)</label>
           <input type="text" name="password" placeholder="Password" />
-          <button type="submit">Submit</button>
+          <button
+            className="mt-5 bg-blue-200 self-center p-4 rounded-lg text-black"
+            type="submit"
+          >
+            Submit Wallet
+          </button>
         </StyledForm>
         <StyledForm submitFunction={createWallet}>
           <div className="text-black text-2xl font-bold text-center">
@@ -130,7 +140,12 @@ const ChooseWallet = () => {
           </div>
           <label>Password</label>
           <input type="text" name="password" placeholder="Password" />
-          <button type="submit">Create Wallet</button>
+          <button
+            className="mt-5 bg-blue-200 self-center p-4 rounded-lg text-black"
+            type="submit"
+          >
+            Create Wallet
+          </button>
         </StyledForm>
       </div>
       <div className="flex flex-col items-center text-center mt-10">
@@ -153,7 +168,7 @@ const ChooseWallet = () => {
           </div>
           <button
             onClick={downloadFile}
-            className="mt-5 bg-gray-500 self-center p-4 rounded-lg text-black"
+            className="mt-5 bg-blue-200 self-center p-4 rounded-lg text-black"
           >
             Download Keystore
           </button>

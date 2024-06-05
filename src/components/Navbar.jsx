@@ -54,14 +54,6 @@ const Navbar = () => {
           Tickets
         </NavLink>
         <NavLink
-          to="/refund"
-          className={({ isActive }) =>
-            isActive ? styles.activeLink : styles.inactiveLink
-          }
-        >
-          Refund
-        </NavLink>
-        <NavLink
           to="/entry"
           className={({ isActive }) =>
             isActive ? styles.activeLink : styles.inactiveLink

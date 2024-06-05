@@ -12,22 +12,19 @@ const BurnTokens = () => {
   const [text, setText] = useState("");
   const [isError, setIsError] = useState(false);
 
-
   const burnTokens = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    if(walletAddress === "" || privateKey === ""){
-        setText(
-            `Invalid Wallet Details`
-          );
-          setIsError(true);
-          setOpenModal(true);
+    let amount = formData.get("amount");
+    if (walletAddress === "" || privateKey === "" || amount === "") {
+      setText(`Invalid Details Provided (Wallet or Amount)`);
+      setIsError(true);
+      setOpenModal(true);
     }
 
     const web3 = new Web3(
       new Web3.providers.HttpProvider("https://rpc2.sepolia.org")
     );
-    let amount = formData.get("amount");
     let contract = new web3.eth.Contract(abi, tokenAddress, {
       from: walletAddress,
     });
@@ -62,7 +59,11 @@ const BurnTokens = () => {
             setOpenModal(true);
           })
           .on("receipt", console.log)
-          .on("error", console.error);
+          .on("error", () => {
+            setText("Error Proving Entry");
+            setIsError(true);
+            setOpenModal(true);
+          });
       } catch (error) {
         console.error(
           "An error occurred while sending the transaction:",
@@ -74,13 +75,52 @@ const BurnTokens = () => {
     });
   };
 
+  const checkBalance = async (e) => {
+    e.preventDefault();
+    const web3 = new Web3("https://rpc2.sepolia.org");
+    if (walletAddress === "" || privateKey === "") {
+      setText(`Invalid Wallet Details`);
+      setIsError(true);
+      setOpenModal(true);
+      setnavbarRefresh(Math.random());
+    }
+    const contract = new web3.eth.Contract(abi, tokenAddress);
+    const tokenBalance = await contract.methods.balanceOf(walletAddress).call();
+
+    setText(
+      ` Your new token balance is ${tokenBalance} if this is the same as your current please be patient as the blockchain is working`
+    );
+    setIsError(false);
+    setOpenModal(true);
+  };
+
   return (
     <>
-      <StyledForm submitFunction={burnTokens}>
-        <label>Amount of tokens for entry</label>
-        <input type="text" name="amount" placeholder="Amount of tokens" />
-        <button type="submit">Click me!</button>
-      </StyledForm>
+      <div className="m-10 flex flex-col gap-5">
+        <StyledForm submitFunction={burnTokens}>
+          <h1 className="text-2xl text-center font-bold">Entry Tokens</h1>
+          <label>Amount of tokens for entry</label>
+          <input type="text" name="amount" placeholder="Amount of tokens" />
+          <button
+            className="mt-5 bg-blue-200 self-center p-4 rounded-lg text-black"
+            type="submit"
+          >
+            Get Entry!
+          </button>
+        </StyledForm>
+        <StyledForm submitFunction={checkBalance}>
+          <h1 className="text-2xl text-center font-bold">
+            Show new Wallet Balance
+          </h1>
+          <button
+            className="mt-5 bg-blue-200 self-center p-4 rounded-lg text-black"
+            type="submit"
+          >
+            Wallet Balance
+          </button>
+        </StyledForm>
+      </div>
+
       <Modal
         open={openModal}
         onClose={() => setOpenModal(false)}
