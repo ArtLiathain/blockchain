@@ -2,11 +2,10 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styles from "./App.module.css";
 import Navbar from "./components/Navbar";
-import ChooseWallet from "./components/Decrypt";
-import Balance from "./components/Balance";
-import BuyTickets from "./components/BuyTickets";
+import ChooseWallet from "./components/ChooseWallet";
+import Tickets from "./components/Tickets";
 import {Web3Provider} from "./components/Web3Context";
-import BurnTokens from "./components/BurnToken";
+import BurnTokens from "./components/Entry";
 
 
 function App() {
@@ -17,11 +16,10 @@ function App() {
           <Navbar></Navbar>
           <Routes>
             <Route path="/choosewallet" element={<ChooseWallet></ChooseWallet>}></Route>
-            <Route path="/balance" element={<Balance></Balance>}></Route>
             <Route path="/entry" element={<BurnTokens></BurnTokens>}></Route>
             <Route
               path="/buytickets"
-              element={<BuyTickets></BuyTickets>}
+              element={<Tickets></Tickets>}
             ></Route>
             <Route path="/*" element={<ChooseWallet></ChooseWallet>}></Route>
           </Routes>

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import StyledForm from "./StyledForm/StyledForm";
 import Web3 from "web3";
 import Web3Context from "./Web3Context";
-import Modal from "./ErrorModel";
+import Modal from "./Modal";
 
 const ChooseWallet = () => {
   const { walletAddress, setwalletAddress, privateKey, setprivateKey } =
@@ -101,7 +101,7 @@ const ChooseWallet = () => {
 
   return (
     <div className="grid grid-cols-2 min-h-screen">
-      <div className="flex flex-col gap-5 mt-10">
+      <div className="ml-10 flex flex-col gap-5 mt-10">
         <StyledForm submitFunction={decryptWallet}>
           <h1 className="text-black font-bold self-center text-2xl">
             Wallet from Keystore
@@ -162,7 +162,7 @@ const ChooseWallet = () => {
           </div>
           <div className="h-1/4 w-full flex flex-col items-stretch">
             <label className="text-black">Private Key</label>
-            <div className="bg-green-300 w-full p-3 rounded-md break-all">
+            <div className="bg-white w-full p-3 rounded-md break-all">
               {privateKey}
             </div>
           </div>

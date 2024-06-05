@@ -33,7 +33,7 @@ const Navbar = () => {
 
 
   return (
-    <div className="bg-gray-700 flex items-center justify-between pr-3">
+    <div className="bg-[#622121] flex items-center justify-between pr-3">
       <nav
         className={`${styles.navbarlink} flex justify-start gap-2 mx-4 text-2xl font-bold p-3`}
       >

@@ -8,7 +8,7 @@ export const Web3Provider = ({ children }) => {
     const [walletAddress, setwalletAddress] = useState('');
     const [privateKey, setprivateKey] = useState('');
     const [navbarRefresh, setnavbarRefresh] = useState(0);
-    const tokenAddress = "0x49801377B813Bc3123a396361F915F60B827b5f8";
+    const tokenAddress = "0xD4fAA33E55D0161EaE5546cA0c9977EeB46eD6e8";
     return (
       <Web3Context.Provider value={{ walletAddress, setwalletAddress, privateKey, setprivateKey, tokenAddress, setnavbarRefresh, navbarRefresh }}>
         {children}

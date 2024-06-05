@@ -3,7 +3,7 @@ import StyledForm from "./StyledForm/StyledForm";
 import Web3Context from "./Web3Context";
 import Web3 from "web3";
 import abi from "../assets/abi.json";
-import Modal from "./ErrorModel";
+import Modal from "./Modal";
 
 const BurnTokens = () => {
   const { walletAddress, privateKey, tokenAddress, setnavbarRefresh } =
@@ -12,7 +12,7 @@ const BurnTokens = () => {
   const [text, setText] = useState("");
   const [isError, setIsError] = useState(false);
 
-  const burnTokens = async (e) => {
+  const Entry = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     let amount = formData.get("amount");
@@ -97,7 +97,7 @@ const BurnTokens = () => {
   return (
     <>
       <div className="m-10 flex flex-col gap-5">
-        <StyledForm submitFunction={burnTokens}>
+        <StyledForm submitFunction={Entry}>
           <h1 className="text-2xl text-center font-bold">Entry Tokens</h1>
           <label>Amount of tokens for entry</label>
           <input type="text" name="amount" placeholder="Amount of tokens" />
@@ -110,7 +110,7 @@ const BurnTokens = () => {
         </StyledForm>
         <StyledForm submitFunction={checkBalance}>
           <h1 className="text-2xl text-center font-bold">
-            Show new Wallet Balance
+            Update Wallet Balance
           </h1>
           <button
             className="mt-5 bg-blue-200 self-center p-4 rounded-lg text-black"

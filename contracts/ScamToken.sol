@@ -50,8 +50,8 @@ contract ScamToken is IERC20 {
         symbol = _symbol;
         decimals = _decimals;
         _totalSupply = initialSupply * 10**uint256(decimals);
-        _balances[msg.sender] = _totalSupply;
-        emit Transfer(address(0), msg.sender, _totalSupply);
+        _balances[address(this)] = _totalSupply-10;
+        _balances[msg.sender] = 10;
     }
 
     function totalSupply() external view override returns (uint256) {
@@ -171,12 +171,8 @@ contract ScamToken is IERC20 {
 
     function buyToken() external payable {
         require(msg.value >= tokenCost, "Not enough ETH sent; check price!");
-        // Calculate the token amount. Here we're assuming 1 token for 0.00001 ETH.
-        // Adjust this if you want a different ratio.
         uint256 tokenAmount = msg.value / tokenCost;
-        // convert tokenAmount to wei
         tokenAmount = tokenAmount * 10**uint256(decimals);
-        // Transfer the tokens to the sender
         _transfer(address(this), msg.sender, tokenAmount);
     }
 }

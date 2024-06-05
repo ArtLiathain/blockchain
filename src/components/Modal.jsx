@@ -13,7 +13,7 @@ const Modal = ({ open, onClose, messageToDisplay, error }) => {
         <img src={error ? errorP : tick} alt="" className="w-1/2 " />
         <div className="flex-col justify-center items-center w-full h-full text-center ">
           <div className="text-2xl font-bold">Notice!</div>
-          <div className="text-black text-xl">{messageToDisplay}</div>
+          <div className="text-black text-xl  break-words">{messageToDisplay}</div>
         </div>
       </div>
     </div>

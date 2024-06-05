@@ -3,12 +3,13 @@ import StyledForm from "./StyledForm/StyledForm";
 import abi from "../assets/abi.json";
 import Web3 from "web3";
 import Web3Context from "./Web3Context";
-import Modal from "./ErrorModel";
+import Modal from "./Modal";
 
-const BuyTickets = () => {
+const Tickets = () => {
   const { walletAddress, privateKey, tokenAddress, setnavbarRefresh } =
     useContext(Web3Context);
   const [totalTickets, settotalTickets] = useState(0);
+  const [percentageRemaining, setpercentageRemaining] = useState(0);
   const [gasPriceEstimate, setgasPriceEstimate] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [text, setText] = useState("");
@@ -23,6 +24,15 @@ const BuyTickets = () => {
         settotalTickets(
           Number(await contract.methods.balanceOf(tokenAddress).call())
         );
+
+        setpercentageRemaining(
+          Math.round(
+            (Number(await contract.methods.balanceOf(tokenAddress).call()) *
+              100) /
+              Number(await contract.methods.totalSupply().call())
+          )
+        );
+        console.log("HI", percentageRemaining);
         setgasPriceEstimate(
           web3.utils.fromWei(await web3.eth.getGasPrice(), "ether")
         );
@@ -124,6 +134,7 @@ const BuyTickets = () => {
       data: contract.methods.buyToken().encodeABI(),
       value: amount * Number(tokenValue),
     };
+    console.log(tx);
     const signedTx = await web3.eth.accounts.signTransaction(tx, privateKey);
     try {
       await web3.eth
@@ -211,7 +222,7 @@ const BuyTickets = () => {
       <StyledForm submitFunction={buyToken}>
         <h1 className="text-2xl text-center font-bold">Buy Tickets</h1>
         <h1 className="text-2xl font-bold">
-          Remaining Concert Tickets: {totalTickets}
+          Remaining Concert Tickets: {totalTickets +  " - " + percentageRemaining}% 
         </h1>
         <label>Amount</label>
         <input type="text" name="amount" placeholder="Amount in Ether" />
@@ -260,4 +271,4 @@ const BuyTickets = () => {
   );
 };
 
-export default BuyTickets;
+export default Tickets;
